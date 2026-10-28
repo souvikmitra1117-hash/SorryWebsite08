@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To My Dearest Wifey Venu — I Am Truly Sorry</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                        handwriting: ['"Caveat"', 'cursive']
+                    },
+                    colors: {
+                        velvet: '#1a0c16',
+                        rosewood: '#2d1224',
+                        blush: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e',
+                            600: '#e11d48'
+                        },
+                        gold: {
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 5s ease-in-out infinite',
+                        'glow': 'glow 3s ease-in-out infinite alternate',
+                        'pulse-gentle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' }
+                        },
+                        glow: {
+                            '0%': { filter: 'drop-shadow(0 0 15px rgba(244, 63, 94, 0.3))' },
+                            '100%': { filter: 'drop-shadow(0 0 35px rgba(251, 113, 133, 0.6))' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* Ambient 2026 Dark-Rose Gradient Canvas */
+        body {
+            background-color: #120710;
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(225, 29, 72, 0.16) 0px, transparent 50%),
+                radial-gradient(at 85% 80%, rgba(244, 63, 94, 0.14) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(147, 51, 234, 0.08) 0px, transparent 65%);
+            background-attachment: fixed;
+            color: #f7eff3;
+            overflow-x: hidden;
+        }
+
+        /* Modern Glassmorphic Panels */
+        .glass-panel {
+            background: rgba(35, 16, 30, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.035);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.065);
+            border-color: rgba(251, 113, 133, 0.35);
+            transform: translateY(-5px);
+        }
+
+        /* Interactive Petal & Light Background */
+        #petalCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* 3D Envelope Animation */
+        .envelope-container {
+            perspective: 1200px;
+        }
+        .envelope-wax {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .envelope-wax:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 25px rgba(244, 63, 94, 0.7);
+        }
+
+        /* Range Slider Styling */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 28px;
+            width: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fb7185, #e11d48);
+            cursor: pointer;
+            box-shadow: 0 0 18px rgba(244, 63, 94, 0.85);
+            transition: transform 0.15s ease;
+        }
+        input[type=range]::-webkit-slider-thumb:hover {
+            transform: scale(1.25);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-rose-500/30 selection:text-rose-200">
+
+    <!-- Interactive Falling Rose Petals Canvas -->
+    <canvas id="petalCanvas"></canvas>
+
+    <!-- Top Floating Ambient Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 flex justify-between items-center backdrop-blur-md bg-black/25 border-b border-white/5">
+        <div class="flex items-center space-x-2.5">
+            <span class="relative flex h-2.5 w-2.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
+            </span>
+            <span class="text-xs tracking-widest uppercase font-semibold text-rose-200/90">A Dedicated Apology for Venu</span>
+        </div>
+
+        <div class="flex items-center space-x-3">
+            <button id="soundBtn" class="px-3.5 py-1.5 rounded-full text-xs bg-white/5 hover:bg-white/10 text-rose-200 border border-white/10 transition flex items-center gap-1.5" title="Toggle Soft Calming Chimes">
+                <i data-lucide="volume-2" id="soundIcon" class="w-3.5 h-3.5"></i>
+                <span id="soundText" class="hidden sm:inline">Calming Audio: On</span>
+            </button>
+            <a href="#letterSection" class="px-3.5 py-1.5 rounded-full text-xs bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 border border-rose-500/30 transition flex items-center gap-1">
+                <span>Read My Letter</span>
+                <i data-lucide="arrow-down" class="w-3 h-3"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content Flow -->
+    <main class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-28 pb-32 space-y-24">
+
+        <!-- 1. HERO SECTION -->
+        <section class="text-center space-y-8 pt-6 sm:pt-12">
+            <!-- Sweet Badge -->
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-rose-500/10 border border-rose-500/25 text-rose-300 text-xs sm:text-sm font-medium tracking-wide shadow-inner">
+                <i data-lucide="sparkles" class="w-4 h-4 text-rose-400"></i>
+                <span>From Your Regretful Husband • To My Beautiful Wifey</span>
+            </div>
+
+            <!-- Grand Emotional Headline -->
+            <div class="space-y-4">
+                <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-normal tracking-tight text-white leading-[1.08]">
+                    I am so truly sorry, <br>
+                    <span class="italic font-semibold bg-gradient-to-r from-rose-400 via-pink-200 to-amber-200 bg-clip-text text-transparent">
+                        My Dearest Venu.
+                    </span>
+                </h1>
+                <p class="max-w-2xl mx-auto text-zinc-300 text-base sm:text-lg font-light leading-relaxed">
+                    Seeing you hurt breaks my heart into a million pieces. My day is empty, my thoughts are clouded, and nothing feels right when there is distance between us.
+                </p>
+            </div>
+
+            <!-- Hero Visual & Romantic Quote Card -->
+            <div class="relative max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+                <img 
+                    src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=1400&q=80" 
+                    alt="Soft golden sunlight on leaves" 
+                    class="w-full h-80 sm:h-96 object-cover object-center filter brightness-90 group-hover:scale-105 transition-transform duration-1000 ease-out"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-velvet via-velvet/40 to-transparent"></div>
+                
+                <div class="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row items-center justify-between text-left gap-4">
+                    <div>
+                        <span class="text-xs uppercase tracking-widest text-rose-300 font-semibold mb-1 block">My Lifeline & Best Friend</span>
+                        <p class="font-serif italic text-lg sm:text-xl text-white">"You are not just my wife, Venu; you are my peace, my heart, and my home."</p>
+                    </div>
+                    <button onclick="sendImmediateHug()" class="whitespace-nowrap px-5 py-2.5 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-medium text-xs tracking-wide shadow-lg shadow-rose-900/50 transition transform hover:scale-105 active:scale-95 flex items-center gap-2">
+                        <i data-lucide="heart" class="w-4 h-4 fill-white"></i>
+                        <span>Send Venu a Hug</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. INTERACTIVE WAX-SEAL LETTER FOR VENU -->
+        <section id="letterSection" class="relative max-w-2xl mx-auto pt-6">
+            <div class="text-center mb-6 space-y-2">
+                <span class="text-xs font-semibold tracking-widest uppercase text-rose-400">Deep From The Core</span>
+                <h2 class="font-serif text-3xl sm:text-4xl text-white">An Open Letter to My Wifey</h2>
+                <p class="text-xs text-zinc-400">Click the wax seal below to open and read what I wrote for you</p>
+            </div>
+
+            <div class="envelope-container relative flex justify-center py-6">
+                <!-- Envelope Container -->
+                <div id="envelope" class="w-full max-w-xl bg-gradient-to-b from-[#2a1322] to-[#1c0c17] border border-rose-500/25 rounded-3xl shadow-2xl p-6 sm:p-10 cursor-pointer transition-all duration-500 hover:border-rose-400/40 relative">
+                    
+                    <!-- Wax Seal Closed Display -->
+                    <div id="envelopeSealed" class="text-center py-12 space-y-5">
+                        <div class="envelope-wax w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-rose-700 via-rose-600 to-red-500 border-2 border-amber-300/40 flex items-center justify-center text-amber-100 shadow-xl shadow-rose-950/80 cursor-pointer">
+                            <span class="font-serif italic font-bold text-2xl tracking-tighter">V</span>
+                        </div>
+                        <div class="space-y-1">
+                            <p class="text-base font-medium text-rose-200">Wax Sealed for Wifey Venu</p>
+                            <p class="text-xs text-zinc-400">Tap anywhere on this envelope to open</p>
+                        </div>
+                    </div>
+
+                    <!-- Revealed Handwritten Letter -->
+                    <div id="envelopeOpened" class="hidden opacity-0 rounded-2xl bg-[#fcf9f2] text-zinc-900 p-6 sm:p-10 shadow-2xl transition-all duration-700 border border-amber-200/80">
+                        <div class="flex justify-between items-start border-b border-amber-200/80 pb-4 mb-6">
+                            <div>
+                                <span class="text-[11px] font-semibold uppercase tracking-widest text-rose-800">My Sincerest Apology</span>
+                                <h3 class="font-serif text-2xl sm:text-3xl font-bold text-zinc-900 mt-0.5">My Precious Venu,</h3>
+                            </div>
+                            <span class="text-xs text-zinc-500 font-serif italic" id="liveDateDisplay"></span>
+                        </div>
+
+                        <div class="space-y-4 text-zinc-800 font-serif text-lg leading-relaxed">
+                            <p>
+                                I am writing this because my words failed me earlier, and I ended up hurting the one person whose smile brightens my entire world.
+                            </p>
+                            <p>
+                                Whatever happened was completely my fault. I was careless, thoughtless, and I didn't listen to you the way you deserved. Being your husband is the greatest blessing of my life, and making you feel unheard or sad makes me deeply disappointed in myself.
+                            </p>
+                            <div class="p-4 rounded-xl bg-rose-50/80 border-l-4 border-rose-500 my-4">
+                                <p class="font-handwriting text-2xl text-rose-950 font-semibold leading-relaxed">
+                                    "Venu, my ego will never be bigger than my love for you. You are my queen, my happiness, and my entire heart."
+                                </p>
+                            </div>
+                            <p>
+                                I don't expect you to instantly forget the hurt, but I promise to spend every day showing you how cherished and loved you are. Can we please turn this page and hold each other tight again?
+                            </p>
+                        </div>
+
+                        <div class="mt-8 pt-5 border-t border-amber-200/80 flex justify-between items-end">
+                            <div>
+                                <p class="text-xs text-zinc-500 uppercase tracking-wider font-sans">Forever your loving hubby,</p>
+                                <p class="font-handwriting text-3xl text-rose-700 font-bold mt-1">Yours & Yours Alone</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 shadow-inner">
+                                <i data-lucide="heart" class="w-6 h-6 fill-rose-500 text-rose-500"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SORRY IMAGERY & REASONS WHY VENU IS IRREPLACEABLE -->
+        <section class="space-y-8">
+            <div class="text-center max-w-xl mx-auto space-y-2">
+                <span class="text-xs font-semibold tracking-widest uppercase text-rose-400">Memories & Sweet Amends</span>
+                <h2 class="font-serif text-3xl sm:text-4xl text-white">Why Life Without Your Smile Is Impossible</h2>
+                <p class="text-xs sm:text-sm text-zinc-400">Three honest reminders of how much you mean to me, Venu.</p>
+            </div>
+
+            <!-- Bento Image Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Puppy Eyes Apology -->
+                <div class="glass-card rounded-3xl overflow-hidden group border border-white/10 flex flex-col justify-between">
+                    <div class="relative h-60 overflow-hidden">
+                        <img 
+                            src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80" 
+                            alt="Cute pleading puppy with puppy eyes" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700 brightness-95"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+                        <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[11px] text-rose-200 border border-white/10 font-medium">
+                            🥺 Please Look At Me Like This
+                        </div>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <h4 class="text-white font-medium text-base">My Sincere Puppy Eyes</h4>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <p class="text-xs text-zinc-300 leading-relaxed font-light">
+                            Whenever you are upset, I look just like this—lost, apologetic, and eagerly waiting for your gentle laughter to echo through our home again.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Fresh Peace Roses -->
+                <div class="glass-card rounded-3xl overflow-hidden group border border-white/10 flex flex-col justify-between">
+                    <div class="relative h-60 overflow-hidden">
+                        <img 
+                            src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80" 
+                            alt="Fresh soft pink roses peace bouquet" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700 brightness-95"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+                        <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[11px] text-rose-200 border border-white/10 font-medium">
+                            🌸 A Virtual Peace Bouquet
+                        </div>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <h4 class="text-white font-medium text-base">For My Lovely Venu</h4>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <p class="text-xs text-zinc-300 leading-relaxed font-light">
+                            These soft pink roses represent the tender love and respect I hold for you. Let them take away the bitterness and replace it with peace.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Hands Together -->
+                <div class="glass-card rounded-3xl overflow-hidden group border border-white/10 flex flex-col justify-between">
+                    <div class="relative h-60 overflow-hidden">
+                        <img 
+                            src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80" 
+                            alt="Warm couple holding hands gently" 
+                            class="w-full h-full object-cover group-hover:scale-110 transition duration-700 brightness-95"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent"></div>
+                        <div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md text-[11px] text-rose-200 border border-white/10 font-medium">
+                            🤝 Always Holding Your Hand
+                        </div>
+                        <div class="absolute bottom-3 left-4 right-4">
+                            <h4 class="text-white font-medium text-base">Team "Us" Forever</h4>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <p class="text-xs text-zinc-300 leading-relaxed font-light">
+                            Fights are temporary, but my hand in yours is permanent. We have overcome hurdles before, and we will only grow closer after this.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. INTERACTIVE HEART REPAIR METER (FOR VENU) -->
+        <section class="glass-panel rounded-3xl p-6 sm:p-12 border border-white/10 relative overflow-hidden">
+            <div class="max-w-2xl mx-auto text-center space-y-6">
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/10 text-xs text-rose-300 border border-rose-500/20 font-medium">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                    <span>Venu's Mood & Forgiveness Simulator</span>
+                </div>
+
+                <div class="space-y-2">
+                    <h2 class="font-serif text-3xl sm:text-4xl text-white">Can We Mend What Feels Hurt?</h2>
+                    <p class="text-xs sm:text-sm text-zinc-400">Slide the heart to show how ready you are to forgive your husband:</p>
+                </div>
+
+                <!-- Heart Emoji Display with Animation -->
+                <div class="py-4 flex flex-col items-center justify-center">
+                    <div id="heartEmoji" class="text-7xl sm:text-8xl select-none transition-all duration-300 transform hover:scale-110">
+                        💔
+                    </div>
+                    <p id="heartStatusText" class="mt-3 text-sm sm:text-base font-semibold text-rose-300">
+                        0%: Still feeling hurt & distant 😔
+                    </p>
+                </div>
+
+                <!-- Slider -->
+                <div class="space-y-3 px-2 sm:px-6 max-w-md mx-auto">
+                    <input 
+                        type="range" 
+                        id="venuHeartSlider" 
+                        min="0" 
+                        max="100" 
+                        value="0" 
+                        class="w-full h-3 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-rose-500"
+                    >
+                    <div class="flex justify-between text-[11px] text-zinc-400 font-medium">
+                        <span>Still upset with you</span>
+                        <span>Softening up a bit</span>
+                        <span>Fully forgiven ❤️</span>
+                    </div>
+                </div>
+
+                <!-- Dynamic Message Card -->
+                <div id="dynamicHeartMessage" class="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 text-xs sm:text-sm text-zinc-200 transition-all duration-300 font-light">
+                    "I understand why you are angry, Venu. I will stay right here until you feel safe and comfortable again."
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. HUSBAND'S SOLEMN PROMISES TO VENU -->
+        <section class="space-y-8">
+            <div class="text-center max-w-xl mx-auto space-y-2">
+                <span class="text-xs font-semibold tracking-widest uppercase text-rose-400">Pledge to Wifey</span>
+                <h2 class="font-serif text-3xl sm:text-4xl text-white">Promises I Make To You Today</h2>
+                <p class="text-xs sm:text-sm text-zinc-400">Click on each promise to hold me accountable, Venu:</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+                <!-- Promise 1 -->
+                <div class="promise-item p-5 rounded-2xl glass-card flex items-start gap-4 cursor-pointer" onclick="togglePromiseCard(this)">
+                    <div class="check-box mt-0.5 w-6 h-6 rounded-lg border border-rose-500/30 flex items-center justify-center text-rose-300 bg-rose-500/10 transition">
+                        <i data-lucide="check" class="w-4 h-4 opacity-0 transition"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-semibold text-white">To listen without being defensive</h4>
+                        <p class="text-xs text-zinc-300">Your feelings are valid. I will hear your heart completely before speaking.</p>
+                    </div>
+                </div>
+
+                <!-- Promise 2 -->
+                <div class="promise-item p-5 rounded-2xl glass-card flex items-start gap-4 cursor-pointer" onclick="togglePromiseCard(this)">
+                    <div class="check-box mt-0.5 w-6 h-6 rounded-lg border border-rose-500/30 flex items-center justify-center text-rose-300 bg-rose-500/10 transition">
+                        <i data-lucide="check" class="w-4 h-4 opacity-0 transition"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-semibold text-white">To speak with tenderness always</h4>
+                        <p class="text-xs text-zinc-300">Never letting a tough day make me forget how gently I must treat my Venu.</p>
+                    </div>
+                </div>
+
+                <!-- Promise 3 -->
+                <div class="promise-item p-5 rounded-2xl glass-card flex items-start gap-4 cursor-pointer" onclick="togglePromiseCard(this)">
+                    <div class="check-box mt-0.5 w-6 h-6 rounded-lg border border-rose-500/30 flex items-center justify-center text-rose-300 bg-rose-500/10 transition">
+                        <i data-lucide="check" class="w-4 h-4 opacity-0 transition"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-semibold text-white">Special pampering & favorite food</h4>
+                        <p class="text-xs text-zinc-300">Making you delicious treats, bringing your favorites, and spoiling you guilt-free.</p>
+                    </div>
+                </div>
+
+                <!-- Promise 4 -->
+                <div class="promise-item p-5 rounded-2xl glass-card flex items-start gap-4 cursor-pointer" onclick="togglePromiseCard(this)">
+                    <div class="check-box mt-0.5 w-6 h-6 rounded-lg border border-rose-500/30 flex items-center justify-center text-rose-300 bg-rose-500/10 transition">
+                        <i data-lucide="check" class="w-4 h-4 opacity-0 transition"></i>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-sm font-semibold text-white">To hug you tight when you're overwhelmed</h4>
+                        <p class="text-xs text-zinc-300">Being your safe refuge where you never have to carry worries alone.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. VIRTUAL COMFORT DISPENSER FOR VENU -->
+        <section class="glass-panel rounded-3xl p-6 sm:p-10 border border-white/10 text-center space-y-6 max-w-2xl mx-auto">
+            <div class="w-12 h-12 mx-auto rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
+                <i data-lucide="gift" class="w-6 h-6"></i>
+            </div>
+            
+            <div class="space-y-2">
+                <h3 class="font-serif text-2xl sm:text-3xl text-white">Venu's Unlimited Hugs Dispenser</h3>
+                <p class="text-xs sm:text-sm text-zinc-300">Whenever you feel low or need warmth, tap this button for an instant virtual hug.</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+                <button onclick="dispenseHug()" class="px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-rose-200 border border-white/15 text-sm font-medium transition flex items-center gap-2 transform active:scale-95">
+                    <i data-lucide="heart-handshake" class="w-4 h-4 text-rose-400"></i>
+                    <span>Collect a Tight Hug</span>
+                </button>
+                <div class="text-xs text-rose-300 font-mono bg-rose-950/60 px-4 py-2.5 rounded-xl border border-rose-500/20">
+                    Hugs Received by Venu: <span id="hugCounter" class="font-bold text-white text-sm">0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. THE BIG QUESTION FOR VENU -->
+        <section class="glass-panel relative rounded-3xl p-8 sm:p-14 text-center overflow-hidden border border-rose-500/30 shadow-2xl">
+            <div class="relative z-10 max-w-xl mx-auto space-y-6">
+                <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-tr from-rose-500 to-pink-500 flex items-center justify-center shadow-lg shadow-rose-600/40 animate-pulse-gentle">
+                    <i data-lucide="heart" class="w-8 h-8 text-white fill-white"></i>
+                </div>
+
+                <div class="space-y-3">
+                    <h2 class="font-serif text-3xl sm:text-5xl text-white font-normal leading-tight">
+                        Will you forgive your silly husband, Venu?
+                    </h2>
+                    <p class="text-xs sm:text-sm text-zinc-300 font-light leading-relaxed">
+                        I love you beyond measure. Your happiness is the only thing that matters to me.
+                    </p>
+                </div>
+
+                <!-- Interactive Choice Buttons -->
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4 relative min-h-[90px]">
+                    <button id="forgiveYesBtn" class="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-rose-500 via-pink-500 to-rose-600 hover:from-rose-600 hover:to-pink-600 text-white font-semibold text-sm shadow-xl shadow-rose-900/50 hover:scale-105 active:scale-95 transition flex items-center justify-center gap-2">
+                        <i data-lucide="smile" class="w-4 h-4"></i>
+                        <span>Yes, I Forgive You, Hubby ❤️</span>
+                    </button>
+                    
+                    <button id="forgiveDodgeBtn" class="w-full sm:w-auto px-7 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 text-zinc-300 border border-white/15 text-sm font-medium transition duration-200">
+                        <span>Still thinking... 🥺</span>
+                    </button>
+                </div>
+
+                <!-- Forgiveness Confirmation Card (Hidden until yes is clicked) -->
+                <div id="celebrationBanner" class="hidden pt-6 space-y-4 animate-fade-in">
+                    <div class="p-6 rounded-2xl bg-gradient-to-r from-rose-950/80 to-purple-950/80 border border-rose-500/40 text-rose-100 shadow-xl">
+                        <p class="font-serif text-2xl sm:text-3xl text-rose-200 mb-2">Thank you, my sweet Venu! 💖</p>
+                        <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed">
+                            You just lifted the heaviest weight off my chest. I am heading over right now to give you the longest, warmest embrace!
+                        </p>
+                        <div class="mt-4 pt-3 border-t border-rose-500/20 text-xs text-amber-200 font-handwriting text-xl">
+                            "Valid for: 1000 kisses, foot massages, and breakfast in bed for my wifey!"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 py-10 border-t border-white/5 text-center text-xs text-zinc-500">
+        <p>Built with genuine love, total remorse, and infinite devotion.</p>
+        <p class="mt-1 text-[11px] text-zinc-600">Specially crafted for my wonderful wife, <span class="text-rose-300 font-medium">Venu</span>.</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Format Dynamic Date
+        const dateOptions = { month: 'long', day: 'numeric', year: 'numeric' };
+        document.getElementById('liveDateDisplay').textContent = new Date().toLocaleDateString(undefined, dateOptions);
+
+        /* ----------------------------------------------------
+           1. WEB AUDIO API SOUND GENERATOR (Synthesized Chimes)
+        ---------------------------------------------------- */
+        let audioCtx = null;
+        let soundActive = true;
+
+        function getAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            return audioCtx;
+        }
+
+        function playChime(freq = 440, type = 'sine', duration = 1.0) {
+            if (!soundActive) return;
+            try {
+                const ctx = getAudioContext();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, ctx.currentTime);
+
+                // Gentle harp-like envelope
+                gain.gain.setValueAtTime(0.0001, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.18, ctx.currentTime + 0.04);
+                gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + duration);
+
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                osc.start();
+                osc.stop(ctx.currentTime + duration);
+            } catch (e) {
+                console.warn(e);
+            }
+        }
+
+        // Sound Toggle Button
+        const soundBtn = document.getElementById('soundBtn');
+        const soundIcon = document.getElementById('soundIcon');
+        const soundText = document.getElementById('soundText');
+
+        soundBtn.addEventListener('click', () => {
+            soundActive = !soundActive;
+            if (soundActive) {
+                soundIcon.setAttribute('data-lucide', 'volume-2');
+                soundText.textContent = 'Calming Audio: On';
+                playChime(523.25); // C5
+            } else {
+                soundIcon.setAttribute('data-lucide', 'volume-x');
+                soundText.textContent = 'Calming Audio: Muted';
+            }
+            lucide.createIcons();
+        });
+
+        /* ----------------------------------------------------
+           2. FALLING PETALS CANVAS BACKGROUND
+        ---------------------------------------------------- */
+        const canvas = document.getElementById('petalCanvas');
+        const ctx = canvas.getContext('2d');
+        let petals = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Petal {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * -canvas.height;
+                this.size = Math.random() * 5 + 3.5;
+                this.speedY = Math.random() * 0.7 + 0.35;
+                this.speedX = Math.sin(Math.random() * Math.PI) * 0.5;
+                this.opacity = Math.random() * 0.35 + 0.15;
+                this.rotation = Math.random() * 360;
+                this.rotSpeed = (Math.random() - 0.5) * 1.2;
+                this.color = Math.random() > 0.5 ? 'rgba(251, 113, 133,' : 'rgba(244, 63, 94,';
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX + Math.sin(this.y * 0.007) * 0.35;
+                this.rotation += this.rotSpeed;
+
+                if (this.y > canvas.height + 25) {
+                    this.reset();
+                    this.y = -15;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.fillStyle = `${this.color} ${this.opacity})`;
+                ctx.beginPath();
+                ctx.ellipse(0, 0, this.size, this.size * 1.5, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 40; i++) {
+            const p = new Petal();
+            p.y = Math.random() * canvas.height;
+            petals.push(p);
+        }
+
+        function renderPetals() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            petals.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(renderPetals);
+        }
+        renderPetals();
+
+        /* ----------------------------------------------------
+           3. WAX-SEAL LETTER OPENING
+        ---------------------------------------------------- */
+        const envelope = document.getElementById('envelope');
+        const envelopeSealed = document.getElementById('envelopeSealed');
+        const envelopeOpened = document.getElementById('envelopeOpened');
+        let isLetterOpen = false;
+
+        envelope.addEventListener('click', () => {
+            if (!isLetterOpen) {
+                isLetterOpen = true;
+                playChime(392); // G4
+                setTimeout(() => playChime(523.25), 150); // C5
+                setTimeout(() => playChime(659.25), 300); // E5
+
+                envelopeSealed.classList.add('hidden');
+                envelopeOpened.classList.remove('hidden');
+                setTimeout(() => {
+                    envelopeOpened.classList.remove('opacity-0');
+                    envelopeOpened.classList.add('opacity-100');
+                }, 40);
+            }
+        });
+
+        /* ----------------------------------------------------
+           4. VENU'S FORGIVENESS SLIDER
+        ---------------------------------------------------- */
+        const venuSlider = document.getElementById('venuHeartSlider');
+        const heartEmoji = document.getElementById('heartEmoji');
+        const heartStatusText = document.getElementById('heartStatusText');
+        const dynamicHeartMessage = document.getElementById('dynamicHeartMessage');
+
+        const states = [
+            { pct: 0, emoji: '💔', status: '0%: Still feeling hurt & distant 😔', text: '"I understand why you are angry, Venu. I will stay right here until you feel safe and comfortable again."' },
+            { pct: 25, emoji: '🩹', status: '25%: Listening to my excuses 🥺', text: '"Thank you for even giving me a chance to explain, Venu. You mean everything to me."' },
+            { pct: 50, emoji: '❤️‍🩹', status: '50%: The ice is slowly melting ☕', text: '"I can see a tiny smile! I promise I will make things right today."' },
+            { pct: 75, emoji: '💓', status: '75%: Almost ready to hug me 🌸', text: '"Almost forgiven! I have your favorite chocolate and a warm hug waiting right now."' },
+            { pct: 100, emoji: '💖', status: '100%: Reconnected & Forever In Love ✨', text: '"Yay! My lovely wife Venu has forgiven me. I promise to cherish you every single day!"' }
+        ];
+
+        venuSlider.addEventListener('input', (e) => {
+            const val = parseInt(e.target.value);
+            let currentState = states[0];
+
+            for (let i = 0; i < states.length; i++) {
+                if (val >= states[i].pct) {
+                    currentState = states[i];
+                }
+            }
+
+            heartEmoji.textContent = currentState.emoji;
+            heartStatusText.textContent = currentState.status;
+            dynamicHeartMessage.textContent = currentState.text;
+
+            // Musical tone scaling
+            playChime(260 + (val * 4.5), 'sine', 0.2);
+
+            if (val === 100) {
+                confetti({
+                    particleCount: 50,
+                    spread: 60,
+                    origin: { y: 0.7 }
+                });
+            }
+        });
+
+        /* ----------------------------------------------------
+           5. PROMISE CHECKBOX TOGGLE
+        ---------------------------------------------------- */
+        function togglePromiseCard(card) {
+            const icon = card.querySelector('.check-box i');
+            const box = card.querySelector('.check-box');
+            const isChecked = !icon.classList.contains('opacity-0');
+
+            if (!isChecked) {
+                icon.classList.remove('opacity-0');
+                box.classList.add('bg-rose-500', 'text-white', 'border-rose-400');
+                box.classList.remove('bg-rose-500/10', 'text-rose-300');
+                playChime(587.33, 'triangle', 0.25); // D5
+            } else {
+                icon.classList.add('opacity-0');
+                box.classList.remove('bg-rose-500', 'text-white', 'border-rose-400');
+                box.classList.add('bg-rose-500/10', 'text-rose-300');
+            }
+        }
+
+        /* ----------------------------------------------------
+           6. VIRTUAL HUG COUNTER
+        ---------------------------------------------------- */
+        let hugCount = 0;
+        function dispenseHug() {
+            hugCount++;
+            document.getElementById('hugCounter').textContent = hugCount;
+            playChime(659.25, 'triangle', 0.4); // E5
+
+            // Small mini-burst of hearts
+            confetti({
+                particleCount: 15,
+                spread: 40,
+                origin: { y: 0.8 },
+                colors: ['#fb7185', '#f43f5e']
+            });
+        }
+
+        function sendImmediateHug() {
+            dispenseHug();
+            document.querySelector('#letterSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /* ----------------------------------------------------
+           7. DODGING "STILL THINKING" BUTTON
+        ---------------------------------------------------- */
+        const forgiveDodgeBtn = document.getElementById('forgiveDodgeBtn');
+        let dodgeIndex = 0;
+        const dodgePleading = [
+            "Please Venu? 🥺",
+            "I'll cook dinner tonight! 🍝",
+            "Unlimited forehead kisses? 😘",
+            "I'll give you a foot massage! 💆‍♀️",
+            "I'm really really sorry! 🙏",
+            "One sweet smile please? 💖"
+        ];
+
+        forgiveDodgeBtn.addEventListener('mouseenter', dodgePlayfully);
+        forgiveDodgeBtn.addEventListener('click', dodgePlayfully);
+
+        function dodgePlayfully() {
+            if (dodgeIndex < dodgePleading.length) {
+                forgiveDodgeBtn.querySelector('span').textContent = dodgePleading[dodgeIndex];
+                dodgeIndex++;
+            }
+            playChime(293.66, 'sine', 0.15); // D4
+            // Gentle playful shifting
+            forgiveDodgeBtn.style.transform = `translate(${(Math.random() - 0.5) * 50}px, ${(Math.random() - 0.5) * 20}px)`;
+        }
+
+        /* ----------------------------------------------------
+           8. "YES, I FORGIVE YOU" CELEBRATION
+        ---------------------------------------------------- */
+        const forgiveYesBtn = document.getElementById('forgiveYesBtn');
+        const celebrationBanner = document.getElementById('celebrationBanner');
+
+        forgiveYesBtn.addEventListener('click', () => {
+            // Harmonic Celebration Arpeggio
+            playChime(523.25, 'triangle', 1.8);
+            setTimeout(() => playChime(659.25, 'triangle', 1.8), 120);
+            setTimeout(() => playChime(783.99, 'triangle', 2.0), 240);
+            setTimeout(() => playChime(1046.50, 'triangle', 2.2), 360);
+
+            // Grand confetti blast
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#f43f5e', '#fb7185', '#fda4af', '#facc15', '#ffffff']
+            });
+
+            setTimeout(() => {
+                confetti({
+                    particleCount: 90,
+                    angle: 60,
+                    spread: 70,
+                    origin: { x: 0.1, y: 0.7 }
+                });
+                confetti({
+                    particleCount: 90,
+                    angle: 120,
+                    spread: 70,
+                    origin: { x: 0.9, y: 0.7 }
+                });
+            }, 300);
+
+            // Display Celebration Card
+            celebrationBanner.classList.remove('hidden');
+            forgiveYesBtn.disabled = true;
+            forgiveYesBtn.classList.add('opacity-80', 'cursor-default');
+            forgiveDodgeBtn.classList.add('hidden');
+
+            // Max out the heart slider automatically
+            venuSlider.value = 100;
+            venuSlider.dispatchEvent(new Event('input'));
+        });
+    </script>
+</body>
+</html>
